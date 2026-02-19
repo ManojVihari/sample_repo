@@ -9,7 +9,7 @@ from typing import Optional
 router = APIRouter()
 
 
-@router.post("/create_user")
+@router.post("/create_users")
 def create_user(name: str, email: str):
     """
     Creates a new user with name and email.
