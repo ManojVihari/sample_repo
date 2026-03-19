@@ -4,7 +4,7 @@ router = APIRouter()
 
 
 @router.post("/create_users")
-def create_user(name: str, email: str, role: str, is_active: bool):
+def create_user(name: str, email: str, role: str, is_active: bool = True):
     """
     Creates a new user with name, email, role, and active status.
 
