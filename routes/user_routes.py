@@ -62,3 +62,63 @@ def create_user(name: str, email: str, role: str, is_active: bool = True):
             status_code=500,
             detail="Internal server error"
         )
+        
+@router.get("/get_user")
+def get_user(email: str):
+    """
+    Fetches a user by email.
+
+    Raises:
+        HTTPException(400): If validation fails.
+        HTTPException(404): If user not found.
+        HTTPException(500): If unexpected error occurs.
+    """
+
+    try:
+        # --- Validation ---
+        if not email or "@" not in email:
+            raise ValueError("Invalid email format")
+
+        # --- Simulated database ---
+        fake_db = {
+            "john@example.com": {
+                "name": "John",
+                "email": "john@example.com",
+                "role": "user",
+                "is_active": True
+            },
+            "admin@example.com": {
+                "name": "Admin",
+                "email": "admin@example.com",
+                "role": "admin",
+                "is_active": True
+            }
+        }
+
+        user = fake_db.get(email.lower())
+
+        if not user:
+            raise HTTPException(
+                status_code=404,
+                detail="User not found"
+            )
+
+        return {
+            "status": "success",
+            "data": user
+        }
+
+    except ValueError as ve:
+        raise HTTPException(
+            status_code=400,
+            detail=str(ve)
+        )
+
+    except HTTPException:
+        raise
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error"
+        )
