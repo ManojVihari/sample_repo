@@ -1,17 +1,23 @@
-name: Update API Documentation
+name: DocAI
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
-  trigger-docai:
+  docai:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger DocAI service
-        run: |
-          curl -X POST http://DOC_AI_SERVER:8080/analyze \
-          -H "Content-Type: application/json" \
-          -d '{"commit": "${{ github.sha }}"}'
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Install Scanner
+        run: pip install git+https://github.com/ManojVihari/docai.git#subdirectory=scanner
+
+      - name: Run DocAI
+        run: docai-scan --commit HEAD --server https://677d-2401-4900-97d9-e87-21a7-d7c4-7eb3-25aa.ngrok-free.app
