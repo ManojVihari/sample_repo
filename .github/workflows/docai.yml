@@ -22,4 +22,4 @@ jobs:
         run: pip install git+https://github.com/ManojVihari/docai.git#subdirectory=scanner
 
       - name: Run DocAI
-        run: docai-scan --commit HEAD --server https://677d-2401-4900-97d9-e87-21a7-d7c4-7eb3-25aa.ngrok-free.app
+        run: docai-scan --commit HEAD --server https://1e9f-2401-4900-4e1f-a965-5cff-82d8-c021-cb70.ngrok-free.app
