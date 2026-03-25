@@ -124,7 +124,7 @@ def get_user(email: str):
         )
 
 @router.get("/get_users")
-def get_user(email: str):
+def get_user_email(email: str):
     """
     Fetches a user by email.
 
